@@ -1,11 +1,12 @@
 {
   "$schema": "./node_modules/@mywallpaper/addon-schema/schema.json",
   "name": "Language Cards",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "entry": "index.js",
   "description": "Compact language learning flashcards widget with public API translations and minimal UI.",
   "author": "OpenAI",
   "type": "widget",
+  "repository": "https://github.com/MyWallpapers/mywallpaper-addon-language-cards",
   "categories": [
     "education",
     "productivity"
