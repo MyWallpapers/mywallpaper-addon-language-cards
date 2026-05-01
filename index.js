@@ -1,6 +1,22 @@
-import { jsx as o, jsxs as T } from "react/jsx-runtime";
-import { useState as S, useRef as j, useEffect as C } from "react";
-import { useViewport as A, useSettings as P } from "@mywallpaper/sdk-react";
+const __MYWALLPAPER_WIDGET_RUNTIME_CONTRACT__ = "1";
+if (!__canvasRuntime) {
+      throw new Error('Canvas runtime globals are unavailable');
+    }
+if (!__canvasRuntime.react || !__canvasRuntime.reactJsxRuntime || !__canvasRuntime.sdkReact || !__canvasRuntime.sdkContracts || !__canvasRuntime.sdkPermissions) {
+      throw new Error('Canvas runtime globals are unavailable');
+    }
+const __canvasRuntimeReact = __canvasRuntime.react;
+const __canvasRuntimeJsxRuntime = __canvasRuntime.reactJsxRuntime;
+const __canvasRuntimeSdk = __canvasRuntime.sdkReact;
+const __canvasRuntimeSdkContracts = __canvasRuntime.sdkContracts;
+const __canvasRuntimeSdkPermissions = __canvasRuntime.sdkPermissions;
+const o = __canvasRuntimeJsxRuntime.jsx;
+const T = __canvasRuntimeJsxRuntime.jsxs;
+const S = __canvasRuntimeReact.useState;
+const j = __canvasRuntimeReact.useRef;
+const C = __canvasRuntimeReact.useEffect;
+const A = __canvasRuntimeSdk.useViewport;
+const P = __canvasRuntimeSdk.useSettings;
 const U = "https://api.mymemory.translated.net/get", D = {
   sourceLanguage: "fr",
   targetLanguage: "en",
