@@ -1,5 +1,37 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { useSettings, useViewport } from '@mywallpaper/sdk-react'
+import { createRoot } from 'react-dom/client'
+import type { CanvasAddonMountContext } from '../generated/mywallpaper-runtime'
+
+type LayerApi = CanvasAddonMountContext['layer']
+
+function useSettings<T>(layer: LayerApi): T {
+  const [settings, setSettings] = useState<T>(() => layer.settings.get() as T)
+
+  useEffect(() => layer.settings.subscribe((next) => setSettings(next as T)), [layer])
+  return settings
+}
+
+function useViewport(layer: LayerApi): { width: number; height: number } {
+  const read = () => ({
+    width: layer.root.clientWidth || window.innerWidth,
+    height: layer.root.clientHeight || window.innerHeight,
+  })
+  const [viewport, setViewport] = useState(read)
+
+  useEffect(() => {
+    const update = () => setViewport(read())
+    update()
+    window.addEventListener('resize', update)
+    const observer = new ResizeObserver(update)
+    observer.observe(layer.root)
+    return () => {
+      window.removeEventListener('resize', update)
+      observer.disconnect()
+    }
+  }, [layer])
+
+  return viewport
+}
 
 type LanguageCode = string
 
@@ -109,9 +141,9 @@ async function translateWord(term: string, targetLanguage: LanguageCode): Promis
   return translatedText
 }
 
-export default function LanguageCards() {
-  const viewport = useViewport()
-  const rawSettings = useSettings<Partial<Settings>>()
+export default function LanguageCards({ layer }: { layer: LayerApi }) {
+  const viewport = useViewport(layer)
+  const rawSettings = useSettings<Partial<Settings>>(layer)
   const settings = mergeSettings(rawSettings)
 
   const [currentSeed, setCurrentSeed] = useState<string>(() => pickNextSeed(null))
@@ -286,4 +318,22 @@ export default function LanguageCards() {
       </button>
     </div>
   )
+}
+
+export function mount(context: CanvasAddonMountContext): () => void {
+  const root = context.layer.root
+  root.classList.add('mwa-language-cards-root')
+  root.style.width = '100%'
+  root.style.height = '100%'
+  root.style.margin = '0'
+  root.style.overflow = 'hidden'
+  root.style.background = 'transparent'
+
+  const reactRoot = createRoot(root)
+  reactRoot.render(<LanguageCards layer={context.layer} />)
+  return () => {
+    reactRoot.unmount()
+    root.classList.remove('mwa-language-cards-root')
+    root.replaceChildren()
+  }
 }
