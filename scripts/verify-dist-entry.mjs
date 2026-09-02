@@ -1,22 +1,29 @@
-import { existsSync, readFileSync } from 'node:fs'
+import assert from 'node:assert/strict'
+import { access, readdir, readFile } from 'node:fs/promises'
+import { constants } from 'node:fs'
 import { resolve } from 'node:path'
 
-const root = resolve(import.meta.dirname, '..')
-const htmlPath = resolve(root, 'dist/index.html')
-const addonPath = resolve(root, 'dist/assets/addon.js')
-
-if (!existsSync(htmlPath) || !existsSync(addonPath)) {
-  throw new Error('Expected dist/index.html and dist/assets/addon.js after build')
+async function exists(path) {
+  try {
+    await access(path, constants.F_OK)
+    return true
+  } catch {
+    return false
+  }
 }
 
-const html = readFileSync(htmlPath, 'utf8')
-if (!html.includes('/assets/addon.js') && !html.includes('assets/addon.js')) {
-  throw new Error('dist/index.html does not reference assets/addon.js')
-}
+const entryPath = resolve('dist/assets/addon.js')
+const entry = await readFile(entryPath, 'utf8')
+assert.ok(entry.length > 0, 'the production module entry must exist and not be empty')
+assert.match(entry, /\bmount\b/u, 'the production entry must contain the mount export')
+assert.equal(await exists(resolve('dist/index.html')), false, 'the Canvas runtime must not depend on an obsolete HTML loader')
 
-const addon = readFileSync(addonPath, 'utf8')
-if (!addon.includes('mount')) {
-  throw new Error('dist/assets/addon.js does not contain the mount entry')
+const assets = await readdir(resolve('dist/assets'))
+for (const stylesheet of assets.filter((fileName) => fileName.endsWith('.css'))) {
+  assert.ok(
+    entry.includes(JSON.stringify('./' + stylesheet)),
+    'the production entry must load emitted stylesheet ' + stylesheet,
+  )
 }
 
 console.log('dist entry verified')
