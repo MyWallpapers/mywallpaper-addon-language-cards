@@ -2,8 +2,8 @@
   "runtime": "canvas-v1",
   "name": "Language Cards",
   "description": "Compact language-learning flashcards with public API translations and a minimal UI.",
-  "version": "0.1.4",
-  "entry": "dist/index.html",
+  "version": "0.1.5",
+  "entry": "dist/assets/addon.js",
   "thumbnail": "assets/thumbnail.png",
   "deviceSettingsVersion": "1",
   "ui": {
