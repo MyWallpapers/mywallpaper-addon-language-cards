@@ -2,7 +2,7 @@
   "runtime": "canvas-v1",
   "name": "Language Cards",
   "description": "Compact language-learning flashcards with public API translations and a minimal UI.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "entry": "dist/assets/addon.js",
   "thumbnail": "assets/thumbnail.png",
   "deviceSettingsVersion": "1",
@@ -23,17 +23,50 @@
       "scope": "layer",
       "default": "fr",
       "options": [
-        { "label": "French", "value": "fr" },
-        { "label": "English", "value": "en" },
-        { "label": "Spanish", "value": "es" },
-        { "label": "German", "value": "de" },
-        { "label": "Italian", "value": "it" },
-        { "label": "Portuguese", "value": "pt" },
-        { "label": "Dutch", "value": "nl" },
-        { "label": "Polish", "value": "pl" },
-        { "label": "Swedish", "value": "sv" },
-        { "label": "Russian", "value": "ru" },
-        { "label": "Japanese", "value": "ja" }
+        {
+          "label": "French",
+          "value": "fr"
+        },
+        {
+          "label": "English",
+          "value": "en"
+        },
+        {
+          "label": "Spanish",
+          "value": "es"
+        },
+        {
+          "label": "German",
+          "value": "de"
+        },
+        {
+          "label": "Italian",
+          "value": "it"
+        },
+        {
+          "label": "Portuguese",
+          "value": "pt"
+        },
+        {
+          "label": "Dutch",
+          "value": "nl"
+        },
+        {
+          "label": "Polish",
+          "value": "pl"
+        },
+        {
+          "label": "Swedish",
+          "value": "sv"
+        },
+        {
+          "label": "Russian",
+          "value": "ru"
+        },
+        {
+          "label": "Japanese",
+          "value": "ja"
+        }
       ]
     },
     {
@@ -44,17 +77,50 @@
       "scope": "layer",
       "default": "en",
       "options": [
-        { "label": "English", "value": "en" },
-        { "label": "French", "value": "fr" },
-        { "label": "Spanish", "value": "es" },
-        { "label": "German", "value": "de" },
-        { "label": "Italian", "value": "it" },
-        { "label": "Portuguese", "value": "pt" },
-        { "label": "Dutch", "value": "nl" },
-        { "label": "Polish", "value": "pl" },
-        { "label": "Swedish", "value": "sv" },
-        { "label": "Russian", "value": "ru" },
-        { "label": "Japanese", "value": "ja" }
+        {
+          "label": "English",
+          "value": "en"
+        },
+        {
+          "label": "French",
+          "value": "fr"
+        },
+        {
+          "label": "Spanish",
+          "value": "es"
+        },
+        {
+          "label": "German",
+          "value": "de"
+        },
+        {
+          "label": "Italian",
+          "value": "it"
+        },
+        {
+          "label": "Portuguese",
+          "value": "pt"
+        },
+        {
+          "label": "Dutch",
+          "value": "nl"
+        },
+        {
+          "label": "Polish",
+          "value": "pl"
+        },
+        {
+          "label": "Swedish",
+          "value": "sv"
+        },
+        {
+          "label": "Russian",
+          "value": "ru"
+        },
+        {
+          "label": "Japanese",
+          "value": "ja"
+        }
       ]
     },
     {
